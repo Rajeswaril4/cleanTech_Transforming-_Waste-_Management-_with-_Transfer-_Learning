@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result - Municipal Waste Classification</title>
+    <link rel="stylesheet" href="../static/assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">MUNICIPAL WASTE CLASSIFICATION</h1>
+            <nav>
+    <ul>
+        <li><a href="/#home">Home</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#predict" class="active">Predict</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/#contact">Contact</a></li>
+    </ul>
+</nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="portfolio-details" class="content-section">
+            <div class="container">
+                <div class="section-title">
+                    <span>RESULT</span>
+                    <h2>Prediction Outcome</h2>
+                </div>
+
+                <div class="prediction-result-container">
+                    <div class="result-image">
+                        <h3>Uploaded Image</h3>
+                        <img src="{{ url_for('static', filename='uploads/' + image_file) }}" alt="Uploaded Waste Image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                    <div class="result-text">
+                        <h3>Classification</h3>
+                        <p class="prediction-label">The model has classified the waste as:</p>
+                        <div class="prediction-box">
+                            <span>{{ prediction }}</span>
+                        </div>
+                        <a href="/#predict" class="btn-learn-more" style="margin-top: 30px;">Try Another Image</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        /* Adds specific styles for the result page to the head */
+        .prediction-result-container {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            margin-top: 40px;
+            text-align: left;
+        }
+        .result-image, .result-text {
+            flex: 1;
+        }
+        .result-text h3 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .prediction-label {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .prediction-box {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .prediction-result-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .result-text {
+                margin-top: 30px;
+            }
+        }
+    </style>
+
+    <script src="../static/assets/script.js"></script>
+</body>
+</html>
