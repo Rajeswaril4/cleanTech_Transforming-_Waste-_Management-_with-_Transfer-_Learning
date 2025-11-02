@@ -1,125 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Municipal Waste Classification</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Municipal Waste Classification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1 class="logo">MUNICIPAL WASTE CLASSIFICATION</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#predict">Predict</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1 class="logo">MUNICIPAL WASTE CLASSIFICATION</h1>
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#predict">Predict</a></li>
+          <li><a href="{{ url_for('blog') }}">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home">
+    <div class="hero-content">
+      <h2>Empowering Smarter Waste Management</h2>
+      <p>Upload an image and classify your waste as Biodegradable, Recyclable, or Trash using AI-powered technology.</p>
+      <a href="#predict" class="btn">Try It Now</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="content-section">
+    <div class="container">
+      <div class="section-title">
+        <span>ABOUT</span>
+        <h2>How It Works</h2>
+      </div>
+      <div class="about-flex">
+        <div class="about-left">
+          <p>This system uses a trained deep learning model based on VGG16 to classify municipal waste images into three categories:</p>
+          <ul>
+            <li><i class="fa fa-check"></i> Biodegradable</li>
+            <li><i class="fa fa-check"></i> Recyclable</li>
+            <li><i class="fa fa-check"></i> Trash</li>
+          </ul>
         </div>
-    </header>
+        <div class="about-right">
+          <p>The AI model was trained on a labeled dataset of waste images. When you upload an image, the system processes it and returns a classification result based on the trained model's prediction.</p>
+          <a href="#predict" class="btn-learn-more">Start Classifying</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section id="home">
-            <div class="hero-content">
-                <h2>Welcome to municipal waste classification</h2>
-                <p>This platform allows you to upload images of waste materials, and our advanced machine learning model will classify them into appropriate categories. Proper waste classification helps in efficient recycling and waste management, making our environment cleaner and more sustainable.</p>
-                <a href="#predict" class="btn">GET STARTED</a>
-            </div>
-        </section>
+  <!-- Predict Section -->
+  <section id="predict" class="content-section">
+    <div class="container">
+      <div class="predict-box">
+        <h3>Upload Image for Waste Classification</h3>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data" class="prediction-form">
+          <div class="form-group-upload">
+            <label for="file">Choose an image file:</label>
+            <input type="file" name="file" id="file" accept="image/*" required>
+          </div>
+          <button type="submit" class="btn-predict">Predict</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-        <section id="about" class="content-section">
-            <div class="container">
-                <div class="section-title">
-                    <span>ABOUT</span>
-                    <h2>Learn More About Us</h2>
-                </div>
-                <div class="about-flex">
-                    <div class="about-left">
-                        <p>Our team comprises innovative scientists, technologists, and environmental experts committed to leveraging advanced classification technologies to ensure that waste is sorted accurately and managed effectively.</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Comprehensive analysis and classification of municipal waste based on type and recyclability.</li>
-                            <li><i class="fas fa-check"></i> Continuous monitoring of waste processing to ensure efficient recycling and disposal.</li>
-                            <li><i class="fas fa-check"></i> Innovative solutions to minimize landfill use by identifying and separating recyclable materials early in the waste management process.</li>
-                        </ul>
-                    </div>
-                    <div class="about-right">
-                        <p>Our team is our greatest asset. We are a diverse group of experts in fields such as environmental science, data analytics, software engineering, and waste management. Together, we bring a wealth of knowledge and experience to tackle the challenges of municipal waste classification and management.</p>
-                        <a href="/ipython-details" class="btn-learn-more">Learn More</a> </div>
-                </div>
+  <!-- Contact Section -->
+  <section id="contact" class="content-section">
+    <div class="container">
+      <div class="section-title">
+        <span>CONTACT</span>
+        <h2>Get in Touch</h2>
+      </div>
+      <div class="contact-flex">
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+            <div class="info-text">
+              <h3>Email</h3>
+              <p>admin@smartwaste.com</p>
             </div>
-        </section>
-        
-        <section id="predict" class="content-section">
-            <div class="container">
-                <div class="section-title">
-                    <span>PREDICT</span>
-                    <h2>Classify Your Waste</h2>
-                </div>
-                <div class="predict-box">
-                    <h3>Image Classification</h3>
-                    <form class="prediction-form" action="/predict" method="post" enctype="multipart/form-data">
-                        <div class="form-group-upload">
-                            <label for="imageUpload">Upload Your Image :</label>
-                            <input type="file" id="imageUpload" name="file" required>
-                        </div>
-                        <button type="submit" class="btn-predict">predict</button>
-                    </form>
-                </div>
+          </div>
+          <div class="info-item">
+            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-text">
+              <h3>Address</h3>
+              <p>SmartCity, India</p>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form>
+            <div class="form-row">
+              <input type="text" placeholder="Your Name" required>
+              <input type="email" placeholder="Your Email" required>
+            </div>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn-send">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section id="contact" class="content-section">
-            <div class="container">
-                 <div class="section-title">
-                    <span>CONTACT</span>
-                    <h2>Contact Us</h2>
-                </div>
-                <p class="intro-text">We are here to help you make the best choices for a sustainable environment and effective waste management. Reach out to us for more information about our services, or to learn how we can help you ensure proper classification and disposal of municipal waste.</p>
-                <div class="contact-flex">
-                    <div class="contact-info">
-                        <div class="info-item">
-                            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="info-text">
-                                <h3>Location:</h3>
-                                <p>Medhipatnam, Hyderabad, 535022</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                           <div class="icon-circle"><i class="fas fa-envelope"></i></div>
-                            <div class="info-text">
-                                <h3>Email:</h3>
-                                <p>NutrigazeOrg@example.com</p>
-                            </div>
-                        </div>
-                         <div class="info-item">
-                            <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
-                            <div class="info-text">
-                                <h3>Call:</h3>
-                                <p>+1 5589 55488 55s</p>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="contact-form">
-                        <div class="form-row">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                        </div>
-                        <input type="text" name="subject" placeholder="Subject" required>
-                        <textarea name="message" rows="6" placeholder="Message" required></textarea>
-                        <div style="text-align: center;">
-                             <button type="submit" class="btn-send">Send Message</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script src="{{ url_for('static', filename='assets/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/script.js') }}"></script>
 </body>
 </html>
