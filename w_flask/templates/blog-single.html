@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post - Municipal Waste Classification</title>
-    <link rel="stylesheet" href="../static/assets/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/style.css') }}">
 </head>
 <body>
 
@@ -13,13 +13,17 @@
             <h1 class="logo">MUNICIPAL WASTE CLASSIFICATION</h1>
             <nav>
                 <ul>
-                    <li><a href="/#home">Home</a></li>
-                    <li><a href="/#about">About</a></li>
-                    <li><a href="/#predict">Predict</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/#contact">Contact</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('home') }}#about">About</a></li>
+                    <li><a href="{{ url_for('home') }}#predict">Predict</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                    <li><a href="{{ url_for('home') }}#contact">Contact</a></li>
                 </ul>
            </nav>
+
+           <div>
+                <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+           </div>
         </div>
     </header>
 
@@ -37,36 +41,12 @@
                     <h3>The Ripple Effect of Proper Sorting</h3>
                     <p>Every item that is correctly identified as 'Recyclable' instead of 'Trash' contributes to a larger positive impact. It saves energy, conserves natural resources, and reduces greenhouse gas emissions associated with producing new materials. Our goal is to make this process as simple as taking a picture.</p>
 
-                    <a href="/blog" class="btn-learn-more" style="margin-top: 20px;">Back to Blog</a>
+                    <a href="{{ url_for('blog') }}" class="btn-learn-more" style="margin-top: 20px;">Back to Blog</a>
                 </article>
             </div>
         </section>
     </main>
 
-    <style>
-        .blog-post-full {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-            line-height: 1.8;
-            font-size: 1.1em;
-        }
-        .blog-post-full h2 {
-            font-size: 2.5em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .post-meta {
-            font-size: 1em;
-            color: #777;
-            margin-bottom: 30px;
-        }
-        .blog-post-full h3 {
-             font-size: 1.8em;
-             color: #444;
-             margin-top: 40px;
-        }
-    </style>
-
+    <script src="{{ url_for('static', filename='assets/script.js') }}"></script>
 </body>
 </html>
